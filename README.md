@@ -9,13 +9,13 @@ No Homebrew: everything comes from nixpkgs.
 | Path | Purpose |
 | --- | --- |
 | [`flake.nix`](flake.nix) | Inputs (nixpkgs-unstable, nix-darwin, home-manager), user and host name |
-| [`darwin/configuration.nix`](darwin/configuration.nix) | System settings: user, shells, system packages |
+| [`darwin/configuration.nix`](darwin/configuration.nix) | System settings: user, shells |
 | [`home/default.nix`](home/default.nix) | home-manager entry point: imports, XDG, session variables, fonts |
 | [`home/apps.nix`](home/apps.nix) | GUI apps (iTerm2, LM Studio, Signal) |
 | [`home/zsh.nix`](home/zsh.nix) | zsh: history, completion, plugins, aliases |
 | [`home/starship.nix`](home/starship.nix) | Starship prompt, settings in [`home/starship.toml`](home/starship.toml) |
 | [`home/git.nix`](home/git.nix) | git settings, identity, SSH commit signing, global ignores |
-| [`home/cli.nix`](home/cli.nix) | direnv (with nix-direnv), eza |
+| [`home/cli.nix`](home/cli.nix) | bat (also as man pager), direnv (with nix-direnv), eza |
 | [`home/dev.nix`](home/dev.nix) | Dev tools, node, uv, gh, Claude Code |
 | [`home/docker.nix`](home/docker.nix) | Docker CLI with colima as runtime (launchd agent) |
 | [`home/editors.nix`](home/editors.nix) | neovim, VSCodium |
@@ -121,5 +121,5 @@ data written by a newer version.
   `~/.local/state/zsh/history`.
 - **npm** installs global packages into `~/.local/share/npm` because the Nix
   store is read-only.
-- **git identity** and other machine-local git settings go into
+- **Work identities** and other machine-local git settings go into
   `~/.local/.gitconfig` (untracked, included by the global config).
