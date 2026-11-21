@@ -22,7 +22,8 @@ jobs:
       - uses: actions/cache@v6
         with:
           path: ~/.cache/prek
-          key: prek-${{ hashFiles('.pre-commit-config.yaml', 'flake.lock') }}
+          # hook envs hold native binaries, so never share them across runner platforms
+          key: prek-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('.pre-commit-config.yaml', 'flake.lock') }}
       - name: Hooks
         run: nix run --inputs-from . nixpkgs#prek -- run --all-files --show-diff-on-failure
       - name: Build darwin configurations
