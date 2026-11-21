@@ -12,7 +12,6 @@
         davidanson.vscode-markdownlint
         detachhead.basedpyright
         editorconfig.editorconfig
-        esbenp.prettier-vscode
         github.vscode-github-actions
         jnoortheen.nix-ide
         mads-hartmann.bash-ide-vscode
@@ -25,6 +24,8 @@
         redhat.vscode-xml
         # required by vscode-kubernetes-tools for manifest validation
         redhat.vscode-yaml
+        # Cline: coding agent for local LLMs served by LM Studio
+        saoudrizwan.claude-dev
         sonarsource.sonarlint-vscode
         streetsidesoftware.code-spell-checker
         streetsidesoftware.code-spell-checker-german
