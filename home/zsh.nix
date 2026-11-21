@@ -80,7 +80,7 @@ in
       zstyle ':completion:*:make::' tag-order targets:
 
       # zsh-autosuggestions: skip large buffers (async is the default since 0.7)
-      ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+      ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=200
 
       # VSCodium for local sessions, neovim over SSH
       if [[ -z $SSH_CONNECTION ]] && (( $+commands[codium] )); then
