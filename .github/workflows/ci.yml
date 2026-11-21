@@ -28,6 +28,8 @@ jobs:
         run: nix run --inputs-from . nixpkgs#prek -- run --all-files --show-diff-on-failure
       - name: Build darwin configurations
         run: |
-          for host in $(nix eval --json .#darwinConfigurations --apply builtins.attrNames | jq -r '.[]'); do
+          # an assignment, so `bash -e` stops when the flake does not evaluate
+          hosts=$(nix eval --raw .#darwinConfigurations --apply 'c: toString (builtins.attrNames c)')
+          for host in $hosts; do
             nix build ".#darwinConfigurations.\"$host\".system" --no-link
           done
