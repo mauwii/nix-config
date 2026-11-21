@@ -19,7 +19,8 @@ No Homebrew: everything comes from nixpkgs.
 | [`home/dev.nix`](home/dev.nix) | Dev tools, node, uv, gh, Claude Code |
 | [`home/docker.nix`](home/docker.nix) | Docker CLI with colima as runtime (launchd agent) |
 | [`home/editors.nix`](home/editors.nix) | neovim, VSCodium |
-| [`.pre-commit-config.yaml`](.pre-commit-config.yaml) | Hooks: whitespace, YAML, gitleaks, actionlint, nixfmt |
+| [`.pre-commit-config.yaml`](.pre-commit-config.yaml) | Hooks: whitespace, YAML, gitleaks, actionlint, nixfmt, statix, deadnix |
+| [`statix.toml`](statix.toml) | statix lints that do not fit the repo style |
 | [`.github/`](.github/) | CI, weekly update PRs, Dependabot |
 
 ## CI and hooks

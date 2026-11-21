@@ -24,7 +24,7 @@ Homebrew, no `curl | sh`, no manual installs.
 ## Check a change
 
 ```sh
-prek run --all-files   # all hooks incl. nixfmt; re-run if it fixed files
+prek run --all-files   # all hooks incl. nixfmt, statix, deadnix; re-run if it fixed files
 darwin-rebuild build --flake ~/nix-darwin
 ```
 

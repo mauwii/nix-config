@@ -27,3 +27,15 @@ repos:
         entry: nix run --inputs-from . nixpkgs#nixfmt --
         language: system
         types: [nix]
+      - id: statix
+        name: statix
+        entry: nix run --inputs-from . nixpkgs#statix -- check
+        language: system
+        types: [nix]
+        # statix accepts only one target, so it lints the whole tree
+        pass_filenames: false
+      - id: deadnix
+        name: deadnix
+        entry: nix run --inputs-from . nixpkgs#deadnix -- --fail
+        language: system
+        types: [nix]

@@ -1,0 +1,2 @@
+# one dotted key per option (programs.x = ...; programs.y = ...;) is the style of this repo
+disabled = [ "repeated_keys" ]
