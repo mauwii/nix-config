@@ -28,7 +28,8 @@ in
     # minikube ships a kubectl symlink that downloads a binary on first use
     (lib.hiPrio kubectl)
     minikube
-    tfenv # keeps terraform versions in $XDG_DATA_HOME/tfenv
+    # downloads OpenTofu/Terraform per project version file, signature-checked (tfenv was not)
+    tenv
 
     jq
     nodejs_26
@@ -37,6 +38,9 @@ in
   ];
 
   programs.uv.enable = true;
+
+  # tenv defaults to ~/.tenv
+  home.sessionVariables.TENV_ROOT = "${config.xdg.dataHome}/tenv";
 
   # The Nix store is read-only, so `npm install -g` needs a writable prefix
   home.sessionVariables.NPM_CONFIG_PREFIX = npmPrefix;
