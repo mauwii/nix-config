@@ -59,6 +59,11 @@
 
         "redhat.telemetry.enabled" = false;
 
+        # minikube updates come from nixpkgs; the extension's "Install" would download a binary
+        "vs-kubernetes" = {
+          checkForMinikubeUpgrade = false;
+        };
+
         # the universal sonarlint VSIX bundles no JRE
         "sonarlint.ls.javaHome" = pkgs.jre_headless.home;
 
