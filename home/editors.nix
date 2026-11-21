@@ -41,39 +41,30 @@
       mutableUserSettings = true;
 
       userSettings = {
+        "chat.editor.fontFamily" = "FiraCode Nerd Font Mono";
+        "editor.fontFamily" = "FiraCode Nerd Font Mono";
+        "editor.fontLigatures" = true;
+        "editor.fontWeight" = "600";
+        "git.autofetch" = true;
+        "git.confirmSync" = false;
+        "redhat.telemetry.enabled" = false;
+        # the universal sonarlint VSIX bundles no JRE
+        "sonarlint.ls.javaHome" = pkgs.jre_headless.home;
         "terminal.integrated.fontFamily" = "FiraCode Nerd Font Mono";
         "terminal.integrated.fontSize" = 11;
         "terminal.integrated.fontWeight" = "600";
-        "editor.fontFamily" = "FiraCode Nerd Font Mono";
-        "editor.fontSize" = 11;
-        "editor.fontWeight" = "600";
-        "editor.fontLigatures" = true;
-        "chat.fontFamily" = "Literata";
-        "chat.fontSize" = 14;
-        "chat.editor.fontFamily" = "FiraCode Nerd Font Mono";
-        "chat.editor.fontSize" = 12;
-        "workbench.sideBar.experimental.fontSize" = 12;
-
-        "git.autofetch" = true;
-        "git.confirmSync" = false;
-
-        "redhat.telemetry.enabled" = false;
-
         # minikube updates come from nixpkgs; the extension's "Install" would download a binary
         "vs-kubernetes" = {
           checkForMinikubeUpgrade = false;
         };
-
-        # the universal sonarlint VSIX bundles no JRE
-        "sonarlint.ls.javaHome" = pkgs.jre_headless.home;
-
         # open Markdown in the preview, but keep the text diff in diff views
-        "workbench.editorAssociations" = {
-          "*.md" = "vscode.markdown.preview.editor";
-        };
         "workbench.diffEditorAssociations" = {
           "*.md" = "default";
         };
+        "workbench.editorAssociations" = {
+          "*.md" = "vscode.markdown.preview.editor";
+        };
+        "workbench.sideBar.experimental.fontSize" = 12;
       };
     };
   };
