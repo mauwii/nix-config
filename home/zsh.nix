@@ -56,23 +56,38 @@ in
     };
 
     initContent = ''
-      # see https://zsh.sourceforge.net/Doc/Release/Completion-System.html
+      # Completion styles, see https://zsh.sourceforge.net/Doc/Release/Completion-System.html
+
+      # Matching
+      # _oldlist reuses the list on screen, _ignored is the fallback for ignored-patterns
       zstyle ':completion:*' completer _oldlist _complete _ignored
-      zstyle ':completion:*:messages' format '%F{yellow}%d%f'
-      zstyle ':completion:*:warnings' format '%B%F{red}No matches for: %F{white}%d%f%b'
-      zstyle ':completion:*:descriptions' format '%B%F{white}--- %d ---%f%b'
-      zstyle ':completion:*' group-name '''
-      zstyle ':completion:*' use-cache true
-      zstyle ':completion:*' cache-path "${cacheDir}/zcompcache"
-      zstyle ':completion:*' ignored-patterns '.DS_Store'
-      # an empty LS_COLORS uses the default colors
-      zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}"
-      zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
-      zstyle ':completion:*:git-checkout:*' sort false
       # case insensitive, unless uppercase letters are typed
       zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+      # hidden from completion, unless it is the only match
+      zstyle ':completion:*' ignored-patterns '.DS_Store'
+
+      # Cache for slow completers (e.g. package lists), kept in the XDG cache
+      zstyle ':completion:*' use-cache true
+      zstyle ':completion:*' cache-path "${cacheDir}/zcompcache"
+
+      # Menu and layout
+      # pick matches with the arrow keys as soon as there is one
       zstyle ':completion:*:default' menu select=1
+      # group matches by type, each group under its description as header
+      zstyle ':completion:*' group-name '''
+      zstyle ':completion:*:descriptions' format '%B%F{white}--- %d ---%f%b'
+      zstyle ':completion:*:messages' format '%F{yellow}%d%f'
+      zstyle ':completion:*:warnings' format '%B%F{red}No matches for: %F{white}%d%f%b'
+      # one group per man page section instead of one long list
       zstyle ':completion:*:manuals' separate-sections true
+      # an empty LS_COLORS uses the default colors
+      zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}"
+
+      # Order for single commands
+      # in $array[<Tab>] offer indexes before parameter names
+      zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
+      # keep git's order, so recent commits stay newest first
+      zstyle ':completion:*:git-checkout:*' sort false
       # make targets first, variables and files only if no target matches
       zstyle ':completion:*:make::' tag-order targets:
 
