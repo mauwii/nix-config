@@ -36,7 +36,6 @@ _: {
 
       merge = {
         tool = "vscodium";
-        ff = true;
         autostash = true;
         log = true;
         conflictStyle = "zdiff3";

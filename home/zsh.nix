@@ -14,7 +14,6 @@ in
     # ~/.zshenv only sets ZDOTDIR, everything else lives here
     dotDir = "${config.xdg.configHome}/zsh";
 
-    enableCompletion = true;
     completionInit = ''
       [[ -d "${cacheDir}" ]] || mkdir -p "${cacheDir}"
       autoload -U compinit && compinit -d "${cacheDir}/zcompdump-$ZSH_VERSION"
@@ -25,9 +24,7 @@ in
       size = 50000;
       save = 50000;
       ignoreAllDups = true;
-      ignoreSpace = true;
       extended = true;
-      share = true;
     };
 
     autosuggestion = {

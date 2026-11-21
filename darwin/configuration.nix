@@ -17,10 +17,6 @@
   # User that system.defaults.* apply to
   system.primaryUser = username;
 
-  # System-wide packages (end up in /run/current-system/sw/bin).
-  # Prefer per-user packages in home/default.nix (home.packages).
-  environment.systemPackages = [ ];
-
   # Writes /etc/zshrc & /etc/zshenv so Nix paths are available in every zsh
   programs.zsh.enable = true;
   # home-manager runs compinit (with a cached dump), don't run it twice
