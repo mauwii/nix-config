@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v7
       - uses: DeterminateSystems/determinate-nix-action@v3
@@ -25,22 +25,6 @@ jobs:
           key: prek-${{ hashFiles('.pre-commit-config.yaml', 'flake.lock') }}
       - name: Hooks
         run: nix run --inputs-from . nixpkgs#prek -- run --all-files --show-diff-on-failure
-      - name: Evaluate darwin configurations
-        # Evaluation only: catches syntax, option and type errors without the
-        # cost of a macOS runner
-        run: >-
-          nix eval --raw .#darwinConfigurations
-          --apply 'cs: toString (map (c: c.system.drvPath) (builtins.attrValues cs))'
-
-  # macOS minutes count 10x in private repos, so only build pull requests
-  # (e.g. the weekly flake.lock update)
-  build:
-    if: github.event_name == 'pull_request'
-    needs: check
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: DeterminateSystems/determinate-nix-action@v3
       - name: Build darwin configurations
         run: |
           for host in $(nix eval --json .#darwinConfigurations --apply builtins.attrNames | jq -r '.[]'); do

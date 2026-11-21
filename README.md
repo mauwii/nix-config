@@ -34,18 +34,16 @@ prek install
 prek run --all-files   # run all hooks by hand
 ```
 
-GitHub Actions:
+GitHub Actions (all jobs on macOS runners, free for public repos):
 
-- **Every push and PR** (Linux): all hooks, then the darwin
-  configuration is evaluated (no build). Catches syntax and option errors.
-- **Pull requests only** (macOS): full build of the configuration. macOS
-  minutes count 10x in private repos, so pushes to `main` skip it.
+- **Every push and PR**: all hooks, then a full build of the darwin
+  configuration.
 - **Every Monday**: PRs that update `flake.lock` and the pre-commit hook
   versions; Dependabot does the same for the GitHub Actions. After merging a
   `flake.lock` update, pull and run `sudo darwin-rebuild switch`.
 
 PRs opened by a workflow with the default `GITHUB_TOKEN` do not start CI. To
-get the macOS build on update PRs, create a fine-grained token (this repo
+get CI on update PRs, create a fine-grained token (this repo
 only, *Contents* and *Pull requests*: read and write) and store it with
 `gh secret set UPDATE_TOKEN`. Without it, close and reopen the PR to start
 CI.
