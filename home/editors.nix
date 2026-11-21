@@ -42,6 +42,22 @@
 
       userSettings = {
         "terminal.integrated.fontFamily" = "FiraCode Nerd Font Mono";
+        "terminal.integrated.fontSize" = 11;
+        "terminal.integrated.fontWeight" = "600";
+        "editor.fontFamily" = "FiraCode Nerd Font Mono";
+        "editor.fontSize" = 11;
+        "editor.fontWeight" = "600";
+        "editor.fontLigatures" = true;
+        "chat.fontFamily" = "Literata";
+        "chat.fontSize" = 14;
+        "chat.editor.fontFamily" = "FiraCode Nerd Font Mono";
+        "chat.editor.fontSize" = 12;
+        "workbench.sideBar.experimental.fontSize" = 12;
+
+        "git.autofetch" = true;
+        "git.confirmSync" = false;
+
+        "redhat.telemetry.enabled" = false;
 
         # the universal sonarlint VSIX bundles no JRE
         "sonarlint.ls.javaHome" = pkgs.jre_headless.home;

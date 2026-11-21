@@ -23,6 +23,8 @@
   home.packages = with pkgs; [
     # used by iTerm2, VSCodium and the starship symbols
     nerd-fonts.fira-code
+    # e-book serif for the VSCodium chat, close to Bookerly (not in nixpkgs)
+    literata
   ];
 
   home.sessionPath = [ "$HOME/.local/bin" ];
