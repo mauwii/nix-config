@@ -1,0 +1,23 @@
+name: Update flake.lock
+
+on:
+  schedule:
+    - cron: "0 6 * * 1" # Monday 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: DeterminateSystems/determinate-nix-action@v3
+      - uses: DeterminateSystems/update-flake-lock@v29
+        with:
+          # PRs opened with GITHUB_TOKEN do not trigger CI; UPDATE_TOKEN (a PAT) does
+          token: ${{ secrets.UPDATE_TOKEN || github.token }}
+          pr-title: "chore: update flake.lock"
+          commit-msg: "chore: update flake.lock"
