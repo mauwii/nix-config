@@ -8,6 +8,9 @@
     signal-desktop
   ];
 
+  # Brave resets its Sparkle update settings on start, so its updater cannot be turned off here
+  programs.brave.enable = true;
+
   targets.darwin.defaults."com.googlecode.iterm2" = {
     SUEnableAutomaticChecks = false;
   };

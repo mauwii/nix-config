@@ -11,7 +11,7 @@ No Homebrew: everything comes from nixpkgs.
 | [`flake.nix`](flake.nix) | Inputs (nixpkgs-unstable, nix-darwin, home-manager), user and host name |
 | [`darwin/configuration.nix`](darwin/configuration.nix) | System settings: user, shells |
 | [`home/default.nix`](home/default.nix) | home-manager entry point: imports, XDG, session variables, fonts |
-| [`home/apps.nix`](home/apps.nix) | GUI apps (iTerm2, LM Studio, Signal) |
+| [`home/apps.nix`](home/apps.nix) | GUI apps (iTerm2, LM Studio, Signal, Brave) |
 | [`home/zsh.nix`](home/zsh.nix) | zsh: history, completion, plugins, aliases |
 | [`home/starship.nix`](home/starship.nix) | Starship prompt, settings in [`home/starship.toml`](home/starship.toml) |
 | [`home/git.nix`](home/git.nix) | git settings, identity, SSH commit signing, global ignores |
