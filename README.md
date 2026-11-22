@@ -10,7 +10,7 @@ Nix configures, Homebrew delivers the programs, both declared here.
 | --- | --- |
 | [`flake.nix`](flake.nix) | Inputs (nixpkgs-unstable, nix-darwin, home-manager, nix-homebrew), user, profiles |
 | [`darwin/configuration.nix`](darwin/configuration.nix) | System settings: user, shells |
-| [`darwin/homebrew.nix`](darwin/homebrew.nix) | Homebrew itself, formulae and casks for all Macs |
+| [`darwin/homebrew.nix`](darwin/homebrew.nix) | Homebrew itself, formulae, casks and App Store apps for all Macs |
 | [`profiles/private.nix`](profiles/private.nix) | What only private Macs get: apps, Cline, default git email |
 | [`home/default.nix`](home/default.nix) | home-manager entry point: imports, XDG, session variables |
 | [`home/apps.nix`](home/apps.nix) | Defaults of GUI apps (iTerm2) |
@@ -101,7 +101,7 @@ follow it.
 
 - Programs go into [`darwin/homebrew.nix`](darwin/homebrew.nix) (all Macs) or
   [`profiles/private.nix`](profiles/private.nix). `brew install` by hand makes
-  the next switch abort.
+  the next switch abort, and so does an App Store app missing in `masApps`.
 - Configuration goes into a home-manager module (`programs.<name>`, search the
   [options](https://home-manager-options.extranix.com/)) in [`home/`](home/).
 - Casks without a checksum are refused.

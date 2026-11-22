@@ -8,6 +8,8 @@
     "signal"
   ];
 
+  homebrew.masApps."Logic Pro" = 634148309;
+
   home-manager.users.${username} =
     { lib, pkgs, ... }:
     {
