@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}:
+{ config, ... }:
 {
   imports = [
     ./apps.nix
@@ -19,11 +15,6 @@
 
   # Use ~/.config, ~/.cache, ~/.local/state, ... and tell tools about them
   xdg.enable = true;
-
-  home.packages = with pkgs; [
-    # used by iTerm2, VSCodium and the starship symbols
-    nerd-fonts.fira-code
-  ];
 
   home.sessionPath = [ "$HOME/.local/bin" ];
 

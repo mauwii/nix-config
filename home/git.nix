@@ -1,6 +1,9 @@
 _: {
   programs.git = {
     enable = true;
+    # comes from Homebrew, security fixes take weeks to reach nixpkgs-unstable
+    package = null;
+    # from Nix, so the filter calls it by store path: GUI apps lack /opt/homebrew/bin
     lfs.enable = true;
 
     signing = {
@@ -14,10 +17,10 @@ _: {
     };
 
     settings = {
-      # GitHub noreply address, so the real one never lands in public commits
       user = {
         name = "Matthias Wild";
-        email = "40327258+mauwii@users.noreply.github.com";
+        # no guessed email: without a matching include below git refuses to commit
+        useConfigOnly = true;
       };
       init.defaultBranch = "main";
       commit.verbose = true;
@@ -85,8 +88,22 @@ _: {
       "*.mac.local*"
     ];
 
-    # Machine-local, untracked settings (e.g. work identities via includeIf);
-    # git silently skips the include if the file does not exist.
-    includes = [ { path = "~/.local/.gitconfig"; } ];
+    includes =
+      # the GitHub email follows the remote, so it stays out of company repos
+      map
+        (url: {
+          condition = "hasconfig:remote.*.url:${url}";
+          path = ./github.gitconfig;
+        })
+        [
+          "git@github.com:*/**"
+          "https://github.com/**"
+          "ssh://git@github.com/**"
+        ]
+      ++ [
+        # Machine-local, untracked settings (e.g. work identities via includeIf);
+        # git silently skips the include if the file does not exist.
+        { path = "~/.local/.gitconfig"; }
+      ];
   };
 }

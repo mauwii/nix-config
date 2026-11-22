@@ -1,9 +1,10 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   programs.neovim.enable = true;
 
   programs.vscodium = {
     enable = true;
+    package = null; # Homebrew delivers it
 
     profiles.default = {
       # anthropic.claude-code stays UI-managed: it releases faster than nixpkgs.
@@ -24,17 +25,12 @@
         redhat.vscode-xml
         # required by vscode-kubernetes-tools for manifest validation
         redhat.vscode-yaml
-        # Cline: coding agent for local LLMs served by LM Studio
-        saoudrizwan.claude-dev
         sonarsource.sonarlint-vscode
         streetsidesoftware.code-spell-checker
         streetsidesoftware.code-spell-checker-german
         tamasfe.even-better-toml
         vadimcn.vscode-lldb
       ];
-
-      # Updates come with `nix flake update` (sets "update.mode" = "none")
-      enableUpdateCheck = false;
 
       # settings.json stays a regular file: changes made in the UI are kept,
       # the settings below are merged on top of it on every switch.
@@ -47,13 +43,17 @@
         "editor.fontWeight" = "600";
         "git.autofetch" = true;
         "git.confirmSync" = false;
+        # GUI apps do not always get the PATH of the shell
+        "git.path" = "/opt/homebrew/bin/git";
         "redhat.telemetry.enabled" = false;
         # the universal sonarlint VSIX bundles no JRE
-        "sonarlint.ls.javaHome" = pkgs.jre_headless.home;
+        "sonarlint.ls.javaHome" = "/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home";
         "terminal.integrated.fontFamily" = "FiraCode Nerd Font Mono";
         "terminal.integrated.fontSize" = 11;
         "terminal.integrated.fontWeight" = "600";
-        # minikube updates come from nixpkgs; the extension's "Install" would download a binary
+        # explicit, settings.json would keep an older "none"
+        "update.mode" = "default";
+        # minikube updates come from Homebrew; the extension's "Install" would download a binary
         "vs-kubernetes" = {
           checkForMinikubeUpgrade = false;
         };
@@ -67,5 +67,14 @@
         "workbench.sideBar.experimental.fontSize" = 12;
       };
     };
+  };
+
+  # home-manager only registers Nix extensions if it has the package, this copies what it would do
+  home.file.".vscode-oss/extensions/.extensions-immutable.json" = {
+    text = pkgs.vscode-utils.toExtensionJson config.programs.vscodium.profiles.default.extensions;
+    onChange = ''
+      run rm $VERBOSE_ARG -f .vscode-oss/extensions/{extensions.json,.init-default-profile-extensions}
+      run /opt/homebrew/bin/codium --list-extensions > /dev/null
+    '';
   };
 }

@@ -1,0 +1,3 @@
+# GitHub noreply address, so the real one never lands in public commits
+[user]
+	email = 40327258+mauwii@users.noreply.github.com

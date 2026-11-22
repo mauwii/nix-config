@@ -13,6 +13,9 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # installs Homebrew itself, the homebrew module of nix-darwin only uses it
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
   };
 
   outputs =
@@ -20,17 +23,21 @@
       self,
       nix-darwin,
       home-manager,
+      nix-homebrew,
       ...
     }:
     let
       username = "mauwii";
-      hostname = "MacBook-Pro-von-Matthias"; # = `scutil --get LocalHostName`
     in
     {
-      darwinConfigurations.${hostname} = nix-darwin.lib.darwinSystem {
+      # named by profile, not by host: Apple's default host names collide, so a switch must name it
+      darwinConfigurations.private = nix-darwin.lib.darwinSystem {
         specialArgs = { inherit self username; };
         modules = [
           ./darwin/configuration.nix
+          ./darwin/homebrew.nix
+          nix-homebrew.darwinModules.nix-homebrew
+          ./profiles/private.nix
 
           home-manager.darwinModules.home-manager
           {

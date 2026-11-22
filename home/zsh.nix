@@ -16,6 +16,8 @@ in
 
     completionInit = ''
       [[ -d "${cacheDir}" ]] || mkdir -p "${cacheDir}"
+      # appended, so completions from Nix and zsh itself win over Homebrew's
+      fpath+=(/opt/homebrew/share/zsh/site-functions)
       autoload -U compinit && compinit -d "${cacheDir}/zcompdump-$ZSH_VERSION"
     '';
 
@@ -102,9 +104,6 @@ in
       fi
 
       export MAKEFLAGS="-j$(sysctl -n hw.ncpu)"
-
-      # LM Studio CLI (lms); via the array, so `typeset -U path` drops duplicates
-      path+=("$HOME/.lmstudio/bin")
     '';
   };
 }

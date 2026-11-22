@@ -30,9 +30,29 @@
 
   programs.eza = {
     enable = true;
+    package = null; # Homebrew delivers it
     icons = "auto";
     git = true;
     extraOptions = [ "--group-directories-first" ];
+  };
+
+  programs.topgrade = {
+    enable = true;
+    settings = {
+      misc = {
+        # allowlist, other steps would update past Nix
+        only = [
+          "brew_formula"
+          "brew_cask"
+          "colima"
+          "uv"
+          "node"
+        ];
+        cleanup = true;
+      };
+      # brew skips casks with their own updater otherwise
+      brew.greedy_auto_updates = true;
+    };
   };
 
   # Override the default eza aliases (ls, ll) with the ones from the old dotfiles;
