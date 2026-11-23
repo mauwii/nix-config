@@ -20,7 +20,7 @@ Nix configures, Homebrew delivers the programs, both declared here.
 | [`home/cli.nix`](home/cli.nix) | bat (also as man pager), direnv (with nix-direnv), eza, topgrade |
 | [`home/dev.nix`](home/dev.nix) | gh, npm prefix, tenv |
 | [`home/docker.nix`](home/docker.nix) | Docker CLI with colima as runtime (launchd agent) |
-| [`home/editors.nix`](home/editors.nix) | neovim, VSCodium |
+| [`home/editors.nix`](home/editors.nix) | neovim (config in [`home/nvim/`](home/nvim/), plugins from nixpkgs), VSCodium |
 | [`.pre-commit-config.yaml`](.pre-commit-config.yaml) | Hooks: whitespace, YAML, gitleaks, actionlint, nixfmt, statix, deadnix |
 | [`statix.toml`](statix.toml) | statix lints that do not fit the repo style |
 | [`.github/`](.github/) | CI, weekly update PRs, Dependabot |

@@ -1,6 +1,21 @@
 { config, pkgs, ... }:
 {
-  programs.neovim.enable = true;
+  programs.neovim = {
+    enable = true;
+    # from nixpkgs instead of vim.pack, so flake.lock pins and updates them
+    plugins = with pkgs.vimPlugins; [
+      bufferline-nvim
+      diffview-nvim
+      gitsigns-nvim
+      lualine-nvim
+      nvim-tree-lua
+      nvim-web-devicons
+      vscode-nvim
+    ];
+    initLua = builtins.readFile ./nvim/init.lua;
+  };
+  # plugins.lua and sidebar.lua, loaded by require() from init.lua
+  xdg.configFile."nvim/lua".source = ./nvim/lua;
 
   programs.vscodium = {
     enable = true;
