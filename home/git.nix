@@ -86,6 +86,9 @@ _: {
 
       # files I only want on my mac
       "*.mac.local*"
+
+      # Claude Code's machine-local settings
+      "**/.claude/settings.local.json"
     ];
 
     includes =
