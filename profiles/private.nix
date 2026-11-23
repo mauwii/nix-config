@@ -8,7 +8,15 @@
     "signal"
   ];
 
-  homebrew.masApps."Logic Pro" = 634148309;
+  homebrew.masApps = {
+    # IDs of the installed iWork 14.5; the store lookup no longer lists them
+    "Keynote" = 409183694;
+    "Logic Pro" = 634148309;
+    "Numbers" = 409203825;
+    "Pages" = 409201541;
+    "Telegram" = 747648890;
+    "WireGuard" = 1451685025;
+  };
 
   home-manager.users.${username} =
     { lib, pkgs, ... }:

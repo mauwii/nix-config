@@ -58,6 +58,8 @@
       "eza"
       "git"
       "jq"
+      # mas CLI for the shell; nix-darwin brings its own only for the activation
+      "mas"
 
       "node"
       # runs the language server of SonarLint, see home/editors.nix
@@ -74,6 +76,7 @@
       "font-fira-code-nerd-font"
       "iterm2"
       "sonarqube-cli"
+      "utm"
       "vlc"
       "vscodium"
     ];
@@ -81,6 +84,7 @@
     # with one entry, cleanup checks App Store apps too: list every installed one
     masApps = {
       "Amphetamine" = 937984704;
+      "CleanMyMac" = 1339170533;
       "Dark Reader for Safari" = 1438243180;
       "iStat Menus" = 6499559693;
       "Strongbox" = 897283731;
