@@ -9,11 +9,11 @@
   ];
 
   homebrew.masApps = {
-    # IDs of the installed iWork 14.5; the store lookup no longer lists them
-    "Keynote" = 409183694;
+    # iWork with the iOS IDs: Apple took the old Mac apps (409…) off sale in 2026
+    "Keynote" = 361285480;
     "Logic Pro" = 634148309;
-    "Numbers" = 409203825;
-    "Pages" = 409201541;
+    "Numbers" = 361304891;
+    "Pages" = 361309726;
     "Telegram" = 747648890;
     "WireGuard" = 1451685025;
   };
