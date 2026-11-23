@@ -40,9 +40,11 @@ prek run --all-files   # run all hooks by hand
 GitHub Actions (all jobs on macOS runners, free for public repos):
 
 - **Every push and PR**: all hooks, then a full build of every profile.
-  It installs nothing from Homebrew, so it does not catch wrong brew names.
+  It installs nothing from Homebrew; `brew info` checks that every formula
+  and cask name exists.
 - **Every Monday**: PRs that update `flake.lock` and the pre-commit hook
-  versions; Dependabot does the same for the GitHub Actions. After merging a
+  versions; Dependabot does the same for the GitHub Actions, which are pinned
+  to commit SHAs because a tag can be moved. After merging a
   `flake.lock` update, pull and switch (see [Daily use](#daily-use)).
 
 PRs opened by a workflow with the default `GITHUB_TOKEN` do not start CI. To
@@ -139,6 +141,11 @@ apps like Signal refuse data written by a newer version.
 
 5. Open a new terminal. If `~/Library/Fonts` did not exist before, log out
    and back in (or run `killall fontd`) so macOS picks up the fonts.
+6. Put the SSH key into `~/.ssh/id_ed25519` and `~/.ssh/id_ed25519.pub`, for
+   example copied from the old Mac: git signs every commit with it and refuses
+   to commit without it. A new key must also replace the one in
+   `allowedSigners` in [`home/git.nix`](home/git.nix) and be added to GitHub
+   as a signing key.
 
 ## Work Macs
 

@@ -13,11 +13,11 @@ jobs:
   update:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: DeterminateSystems/determinate-nix-action@v3
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: DeterminateSystems/determinate-nix-action@4b040423529d49b1a19ba918742e0aa9aa95031a # v3.24.3
       # skip releases younger than a week, in case one gets pulled or compromised
       - run: nix run --inputs-from . nixpkgs#prek -- update --cooldown-days 7
-      - uses: peter-evans/create-pull-request@v8
+      - uses: peter-evans/create-pull-request@3ffccacd46053766916f087ce41d627c0b8cf2d1 # v8.1.3
         with:
           # PRs opened with GITHUB_TOKEN do not trigger CI; UPDATE_TOKEN (a PAT) does
           token: ${{ secrets.UPDATE_TOKEN || github.token }}

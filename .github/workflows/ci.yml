@@ -17,9 +17,9 @@ jobs:
   check:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: DeterminateSystems/determinate-nix-action@v3
-      - uses: actions/cache@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: DeterminateSystems/determinate-nix-action@4b040423529d49b1a19ba918742e0aa9aa95031a # v3.24.3
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ~/.cache/prek
           # hook envs hold native binaries, so never share them across runner platforms
@@ -31,5 +31,8 @@ jobs:
           # an assignment, so `bash -e` stops when the flake does not evaluate
           hosts=$(nix eval --raw .#darwinConfigurations --apply 'c: toString (builtins.attrNames c)')
           for host in $hosts; do
+            # the build does not check brew names; brew info fails on unknown ones and installs nothing
+            nix eval --raw ".#darwinConfigurations.\"$host\".config.homebrew.brews" --apply 'l: toString (map (b: b.name) l)' | xargs brew info --json=v2 --formula > /dev/null
+            nix eval --raw ".#darwinConfigurations.\"$host\".config.homebrew.casks" --apply 'l: toString (map (c: c.name) l)' | xargs brew info --json=v2 --cask > /dev/null
             nix build ".#darwinConfigurations.\"$host\".system" --no-link
           done
