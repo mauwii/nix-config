@@ -53,13 +53,31 @@
       mutableUserSettings = true;
 
       userSettings = {
+        "[shellscript]" = {
+          "editor.defaultFormatter" = "mkhl.shfmt";
+        };
         "chat.editor.fontFamily" = "FiraCode Nerd Font Mono";
+        "chat.fontSize" = 14;
         # Docker DX 0.18 turns Compose features off if redhat.vscode-yaml is installed; vscode-yaml 2.0 already steps back
         "docker.extension.enableComposeLanguageServer" = true;
         "docker.lsp.telemetry" = "off";
         "editor.fontFamily" = "FiraCode Nerd Font Mono";
         "editor.fontLigatures" = true;
         "editor.fontWeight" = "600";
+        "editor.rulers" = [
+          {
+            color = "#15fd007f";
+            column = 80;
+          }
+          {
+            color = "#c2790b70";
+            column = 100;
+          }
+          {
+            color = "#a10d2d99";
+            column = 120;
+          }
+        ];
         "git.autofetch" = true;
         "git.confirmSync" = false;
         # GUI apps do not always get the PATH of the shell
