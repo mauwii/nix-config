@@ -75,6 +75,7 @@ symbol = " "
 symbol = " "
 
 [hostname]
+ssh_only = false
 ssh_symbol = " "
 
 [java]
@@ -127,5 +128,7 @@ style = "bold red"
 disabled = false
 
 [username]
+# user@host, the hostname module follows
+format = "[$user]($style)@"
 style_user = "green"
 show_always = true
