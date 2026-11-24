@@ -27,6 +27,7 @@
         charliermarsh.ruff
         davidanson.vscode-markdownlint
         detachhead.basedpyright
+        docker.docker
         editorconfig.editorconfig
         github.vscode-github-actions
         jnoortheen.nix-ide
@@ -53,6 +54,9 @@
 
       userSettings = {
         "chat.editor.fontFamily" = "FiraCode Nerd Font Mono";
+        # Docker DX 0.18 turns Compose features off if redhat.vscode-yaml is installed; vscode-yaml 2.0 already steps back
+        "docker.extension.enableComposeLanguageServer" = true;
+        "docker.lsp.telemetry" = "off";
         "editor.fontFamily" = "FiraCode Nerd Font Mono";
         "editor.fontLigatures" = true;
         "editor.fontWeight" = "600";
