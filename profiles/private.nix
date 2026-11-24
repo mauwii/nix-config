@@ -6,6 +6,7 @@
     "calibre"
     "lm-studio"
     "signal"
+    "steam"
   ];
 
   homebrew.masApps = {
