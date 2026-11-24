@@ -7,6 +7,7 @@
     ./docker.nix
     ./editors.nix
     ./git.nix
+    ./keyboard.nix
     ./starship.nix
     ./zsh.nix
   ];
