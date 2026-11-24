@@ -8,10 +8,12 @@ Nix configures, Homebrew delivers the programs, both declared here.
 
 | Path | Purpose |
 | --- | --- |
-| [`flake.nix`](flake.nix) | Inputs (nixpkgs-unstable, nix-darwin, home-manager, nix-homebrew), user, profiles |
+| [`flake.nix`](flake.nix) | Inputs (nixpkgs-unstable, nix-darwin, home-manager, nix-homebrew), user, one configuration per Mac |
 | [`darwin/configuration.nix`](darwin/configuration.nix) | System settings: user, shells |
 | [`darwin/homebrew.nix`](darwin/homebrew.nix) | Homebrew itself, formulae, casks and App Store apps for all Macs |
 | [`profiles/private.nix`](profiles/private.nix) | What only private Macs get: apps, Cline, default git email |
+| [`hosts/atlas.nix`](hosts/atlas.nix) | M4 Max: host name, CleanMyMac with license (cask) |
+| [`hosts/kronos.nix`](hosts/kronos.nix) | M2 Max: host name, CleanMyMac from the App Store |
 | [`home/default.nix`](home/default.nix) | home-manager entry point: imports, XDG, session variables |
 | [`home/apps.nix`](home/apps.nix) | Defaults of GUI apps (iTerm2) |
 | [`home/zsh.nix`](home/zsh.nix) | zsh: history, completion, plugins, aliases |
@@ -40,7 +42,7 @@ prek run --all-files   # run all hooks by hand
 
 GitHub Actions (all jobs on macOS runners, free for public repos):
 
-- **Every push and PR**: all hooks, then a full build of every profile.
+- **Every push and PR**: all hooks, then a full build of every configuration.
   It installs nothing from Homebrew; `brew info` checks that every formula
   and cask name exists.
 - **Every Monday**: PRs that update `flake.lock` and the pre-commit hook
@@ -56,22 +58,23 @@ CI.
 
 ## Daily use
 
-Every command names its profile, there is no default. `private` is the only
-one so far.
+Every command names the configuration of the Mac, there is no default. Each
+is named like the host name it sets: `atlas` (M4 Max) and `kronos` (M2 Max).
+The examples use `atlas`.
 
 ```sh
 # apply changes; after adding formulae or casks run `brew update` first
-sudo darwin-rebuild switch --flake ~/git/mauwii/nix-config#private
+sudo darwin-rebuild switch --flake ~/git/mauwii/nix-config#atlas
 
 # build only, to check that the config evaluates and builds
-darwin-rebuild build --flake ~/git/mauwii/nix-config#private
+darwin-rebuild build --flake ~/git/mauwii/nix-config#atlas
 
 # update the programs from Homebrew and the Docker engine (restarts Docker)
 topgrade
 
 # update all inputs (nixpkgs, nix-darwin, home-manager, nix-homebrew), then apply
 nix flake update --flake ~/git/mauwii/nix-config
-sudo darwin-rebuild switch --flake ~/git/mauwii/nix-config#private
+sudo darwin-rebuild switch --flake ~/git/mauwii/nix-config#atlas
 
 # something broke: go back to the previous generation (not for Homebrew packages);
 # first `brew uninstall` what the last switch added, see below
@@ -123,9 +126,10 @@ apps like Signal refuse data written by a newer version.
    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
    ```
 
-2. Clone this repository to `~/git/mauwii/nix-config` and choose the profile.
-   `private` is only for private Macs; a work Mac needs its own profile in
-   [`flake.nix`](flake.nix) without `profiles/private.nix`, and the email rule
+2. Clone this repository to `~/git/mauwii/nix-config`. A new Mac needs a file
+   in [`hosts/`](hosts/) and a configuration in [`flake.nix`](flake.nix).
+   `profiles/private.nix` is only for private Macs; a work Mac needs a
+   configuration without it, and the email rule
    from [Work Macs](#work-macs).
 3. Move the shell files that the Nix installer modified out of the way,
    otherwise nix-darwin refuses to overwrite them:
@@ -137,7 +141,7 @@ apps like Signal refuse data written by a newer version.
 4. Do the first activation (afterwards `darwin-rebuild` is in the PATH):
 
    ```sh
-   sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake ~/git/mauwii/nix-config#private
+   sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake ~/git/mauwii/nix-config#<host>
    ```
 
 5. Open a new terminal. If `~/Library/Fonts` did not exist before, log out

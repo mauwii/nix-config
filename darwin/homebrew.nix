@@ -84,7 +84,6 @@
     # with one entry, cleanup checks App Store apps too: list every installed one
     masApps = {
       "Amphetamine" = 937984704;
-      "CleanMyMac" = 1339170533;
       "Dark Reader for Safari" = 1438243180;
       "iStat Menus" = 6499559693;
       "Strongbox" = 897283731;

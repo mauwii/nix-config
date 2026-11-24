@@ -28,28 +28,36 @@
     }:
     let
       username = "mauwii";
+
+      privateMac =
+        host:
+        nix-darwin.lib.darwinSystem {
+          specialArgs = { inherit self username; };
+          modules = [
+            ./darwin/configuration.nix
+            ./darwin/homebrew.nix
+            nix-homebrew.darwinModules.nix-homebrew
+            ./profiles/private.nix
+            host
+
+            home-manager.darwinModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                # Rename existing files (e.g. ~/.zshrc) instead of aborting activation
+                backupFileExtension = "before-home-manager";
+                users.${username} = import ./home;
+              };
+            }
+          ];
+        };
     in
     {
-      # named by profile, not by host: Apple's default host names collide, so a switch must name it
-      darwinConfigurations.private = nix-darwin.lib.darwinSystem {
-        specialArgs = { inherit self username; };
-        modules = [
-          ./darwin/configuration.nix
-          ./darwin/homebrew.nix
-          nix-homebrew.darwinModules.nix-homebrew
-          ./profiles/private.nix
-
-          home-manager.darwinModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              # Rename existing files (e.g. ~/.zshrc) instead of aborting activation
-              backupFileExtension = "before-home-manager";
-              users.${username} = import ./home;
-            };
-          }
-        ];
+      # named like the host name that each file in hosts/ sets
+      darwinConfigurations = {
+        atlas = privateMac ./hosts/atlas.nix;
+        kronos = privateMac ./hosts/kronos.nix;
       };
     };
 }
