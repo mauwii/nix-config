@@ -15,7 +15,7 @@ Nix configures, Homebrew delivers the programs, both declared here.
 | [`hosts/atlas.nix`](hosts/atlas.nix) | M4 Max: host name, CleanMyMac with license (cask) |
 | [`hosts/kronos.nix`](hosts/kronos.nix) | M2 Max: host name, CleanMyMac from the App Store |
 | [`home/default.nix`](home/default.nix) | home-manager entry point: imports, XDG, session variables |
-| [`home/apps.nix`](home/apps.nix) | Defaults of GUI apps (iTerm2) |
+| [`home/apps.nix`](home/apps.nix) | Defaults of GUI apps: iTerm2 updater, default profile (Dynamic Profile) |
 | [`home/zsh.nix`](home/zsh.nix) | zsh: history, completion, plugins, aliases |
 | [`home/starship.nix`](home/starship.nix) | Starship prompt, settings in [`home/starship.toml`](home/starship.toml) |
 | [`home/git.nix`](home/git.nix) | git settings, identity per remote, SSH commit signing, global ignores |
