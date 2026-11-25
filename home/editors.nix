@@ -61,6 +61,8 @@
         # Docker DX 0.18 turns Compose features off if redhat.vscode-yaml is installed; vscode-yaml 2.0 already steps back
         "docker.extension.enableComposeLanguageServer" = true;
         "docker.lsp.telemetry" = "off";
+        "editor.cursorBlinking" = "smooth";
+        "editor.cursorSmoothCaretAnimation" = "on";
         "editor.fontFamily" = "FiraCode Nerd Font Mono";
         "editor.fontLigatures" = true;
         "editor.fontWeight" = "600";
@@ -94,6 +96,7 @@
         "vs-kubernetes" = {
           checkForMinikubeUpgrade = false;
         };
+        "window.autoDetectColorScheme" = true;
         # open Markdown in the preview, but keep the text diff in diff views
         "workbench.diffEditorAssociations" = {
           "*.md" = "default";
